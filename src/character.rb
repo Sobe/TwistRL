@@ -1,0 +1,51 @@
+require 'src/zorder'
+
+# Represents the player's character in the maze.
+class Character
+  
+  def initialize window
+    @x, @y = window.maze.get_first_empty_square
+    @window = window
+    @image = window.images_loader.get_image(:player)
+  end
+  
+  def draw
+    @image.draw(@x*32, @y*32, ZOrder::Character)
+  end
+  
+  def update
+  end
+  
+  def move(direction)
+    destination = [@x + ((direction == :right)? 1 : 0) - ((direction == :left)? 1 : 0),
+                   @y + ((direction == :down)? 1 : 0) - ((direction == :up)? 1 : 0)]
+    #puts "Moving to [#{destination[0]} ; #{destination[1]}]"
+    if can_move_to destination
+      @x, @y = destination
+    else
+      puts "Impossible to move to [#{destination[0]} ; #{destination[1]}]"
+    end
+  end
+  
+  def can_move_to(destination)
+    @window.maze.contains(destination) \
+      && !@window.maze.get_square(destination[1], destination[0]).is_solid
+  end
+  
+  def move_left
+    @x -= 1
+  end
+  
+  def move_right
+    @x += 1
+  end
+  
+  def move_down
+    @y += 1
+  end
+  
+  def move_up
+    @y -= 1
+  end
+  
+end

@@ -4,22 +4,27 @@ require 'gosu'
 require 'src/keysManager'
 require 'src/character'
 require 'src/maze'
+require 'src/imagesLoader'
 
 include Gosu
 
-# Main game's widow.
-class Game < Window
+# Main game's window.
+class GameWindow < Window
   
-  attr_reader :maze
+  attr_reader :maze, :images_loader
+  
+  @@SQUARE_SIZE = 32
 
-  def initialize    
-    super(640, 320, false)
+  def initialize 
+    super(672, 448, false)
     self.caption = "TwistRL"
     
+    # Images loader
+    @images_loader = ImagesLoader.new self
     # Maze
-    width = 20
-    height = 10
-    @maze = Maze.new(self, width, height)
+    width = 3
+    height = 2
+    @maze = Maze.new(self, width, height, 7, 7)
     
     # Player's character
     @character = Character.new(self)
@@ -47,6 +52,10 @@ class Game < Window
     @key_manager.key_up(id)
   end
   
+  def get_squares_size
+    @@SQUARE_SIZE
+  end
+  
 end
 
-Game.new.show
+GameWindow.new.show
