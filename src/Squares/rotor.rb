@@ -2,23 +2,22 @@ require 'src/zorder'
 require 'src/square'
 
 # Represents an empty square.
-class Ground < Square
-  
-  attr_accessor :x, :y
+class Rotor < Square
   
   def initialize(window, room, x, y)
     @window = window
     @room = room
     
     @x, @y = x, y
-    @is_solid = false
+    
+    @window = window
     
     @empty = true
     @content = []
     
     # UI
-    @image = @window.images_loader.get_image(:ground)
-    @ascii = "."
+    @image = @window.images_loader.get_image(:rotor)
+    @ascii = "¤"
   end
   
 end

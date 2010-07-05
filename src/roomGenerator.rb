@@ -24,6 +24,7 @@ class RoomGenerator
     dig_walls
     anti_alias
     add_doors
+    add_a_rotor
     
     #~ @room.print_ascii
     #~ puts ""
@@ -109,6 +110,11 @@ class RoomGenerator
         end
       end
     end
+  end
+  
+  def add_a_rotor
+    c, l = @room.get_first_empty_square
+    @room.squares[l][c] = Rotor.new(@window, @room, c, l)
   end
   
   # Returns a 2*2 array containing squares' classes at:

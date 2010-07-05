@@ -6,7 +6,8 @@ require 'src/character'
 
 class KeysManager
   
-  def initialize(charac)
+  def initialize(maze, charac)
+    @maze = maze
     @character = charac
     
     @action_for_key_up = init_actions_key_up
@@ -14,10 +15,14 @@ class KeysManager
   
   def init_actions_key_up
     {
+      # Moves
       Gosu::Button::KbRight => MoveAction.new(@character, :right),
       Gosu::Button::KbLeft => MoveAction.new(@character, :left),
       Gosu::Button::KbUp => MoveAction.new(@character, :up),
       Gosu::Button::KbDown => MoveAction.new(@character, :down),
+      
+      # Rotor
+      Gosu::Button::KbR => RotateAction.new(@maze, @character)
     }
   end
   

@@ -63,4 +63,33 @@ class Room
     end
   end
   
+  # Rotates room in direct sense.
+  # Also updates accordingly each contained square.
+  def rotate
+    # Rotated room
+    @rotated = Array.new(@height) do |l|
+      Array.new(@width) do |c|
+        nil
+      end
+    end
+    
+    @squares.each do |line|
+      line.each do |sq|
+        @rotated[sq.x][@height -1 - sq.y] = sq
+        sq.rotate
+      end
+    end
+    
+    @squares = @rotated
+  end
+  
+  def get_first_empty_square
+    @squares.each do |line|
+      line.each do |square|
+        return [square.x, square.y] if square.empty
+      end
+    end
+  end
+    
+  
 end

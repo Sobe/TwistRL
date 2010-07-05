@@ -8,6 +8,8 @@ class Herse < Square
     @window = window
     @room = room
     
+    @content = []
+    
     @x, @y = x, y
     # :vertical or :horizontal
     @orientation = orientation
@@ -28,6 +30,12 @@ class Herse < Square
   def update_image
     id = "herse_#{(@orientation == :horizontal)? "h" : "v"}_#{@state}".to_sym
     @image = @window.images_loader.get_image(id)
+  end
+  
+  def rotate
+    super
+    @orientation = (@orientation == :horizontal)? :vertical : :horizontal
+    update_image
   end
   
 end

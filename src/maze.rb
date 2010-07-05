@@ -42,6 +42,7 @@ class Maze
   def get_first_empty_square
     @rooms.each do |rooms_line|
       rooms_line.each do |room|
+        # TODO Use room.get_first_empty_square
         room.squares.each do |line|
           line.each do |square|
             return [@rooms_width*room.x + square.x, @rooms_height*room.y + square.y] if square.empty

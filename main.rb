@@ -30,7 +30,7 @@ class GameWindow < Window
     @character = Character.new(self)
     
     # Keys manager
-    @key_manager = KeysManager.new @character
+    @key_manager = KeysManager.new(@maze, @character)
   end
   
   def update

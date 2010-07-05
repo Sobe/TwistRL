@@ -12,6 +12,7 @@ class Wall < Square
     @is_solid = true
     
     @empty = false
+    @content = []
     
     # UI
     @image = @window.images_loader.get_image(:wall)
